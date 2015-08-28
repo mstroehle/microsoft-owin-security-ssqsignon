@@ -55,9 +55,9 @@ namespace Microsoft.Owin.Security.SSQSignon
         {
             var identity = new ClaimsIdentity(Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, response.UserId, null, Options.AuthenticationType));
+            response.Scope.Split(' ').ToList().ForEach(r => identity.AddClaim(new Claim(ClaimTypes.Role, r, System.Security.Claims.ClaimValueTypes.String, Options.AuthenticationType)));
 
             var properties = new AuthenticationProperties();
-            properties.Dictionary.Add("scope", response.Scope);
 
             return new AuthenticationTicket(identity, properties);
        }
