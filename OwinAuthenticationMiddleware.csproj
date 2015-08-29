@@ -58,6 +58,7 @@
     <Compile Include="SSQSignonAuthenticationHandler.cs" />
     <Compile Include="SSQSignonAuthenticationMiddleware.cs" />
     <Compile Include="SSQSignonAuthenticationOptions.cs" />
+    <Compile Include="SSQSignonDefaults.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

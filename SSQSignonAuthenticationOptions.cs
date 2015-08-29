@@ -9,7 +9,7 @@ namespace Microsoft.Owin.Security.SSQSignon
     public class SSQSignonAuthenticationOptions : AuthenticationOptions
     {
         public SSQSignonAuthenticationOptions(string module)
-            :base("SSQSignon")
+            :base(SSQSignonDefaults.AuthenticationType)
         {
             Module = module;
             Description.Caption = AuthenticationType;
