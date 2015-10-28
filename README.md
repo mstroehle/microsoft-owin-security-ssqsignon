@@ -47,7 +47,8 @@ The strategy requires your module's `module name`.
 
 #### Authenticate Requests
 
-Each space separated component of the *scope* inside the token will be translated into a *Role*.
+The *user id* inside contained inside the token will be stored in the User.Identity.Name property of the Controller.
+Each space separated component of the *scope* inside the token will be translated into a *Role* of the identity.
 You may then use the roles to seamlessly apply permissions into your application.
 
 For example:
@@ -57,7 +58,7 @@ For example:
     {
         public dynamic Get()
         {
-            return Json(new { message = "Hello, I am the cat!" });
+            return Json(new { message = string.Format("Hello {0}, you are a cat!", this.User.Identity.Name) });
         }
     }
 
