@@ -38,7 +38,7 @@ namespace Microsoft.Owin.Security.SSQSignon
 
         private RestSharp.RestClient RestClient
         {
-            get { return new RestSharp.RestClient("https://tinyusers.azurewebsites.net"); }
+            get { return new RestSharp.RestClient("https://ssqsignon.com"); }
         }
 
         private RestSharp.RestRequest WhoAmIRequest
