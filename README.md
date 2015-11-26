@@ -27,23 +27,6 @@ The strategy requires your module's `module name`.
     {
         app.UseSSQSignonAuthentication("Your-SSQSignon-module-name");
     }
-    
-    // WebApiConfig.cs
-    public static void Register(HttpConfiguration config)
-    {
-        // Web API configuration and services
-        config.SuppressDefaultHostAuthentication();
-        config.Filters.Add(new HostAuthenticationFilter(SSQSignonDefaults.AuthenticationType));
-
-        // Web API routes
-        config.MapHttpAttributeRoutes();
-
-        config.Routes.MapHttpRoute(
-            name: "DefaultApi",
-            routeTemplate: "{controller}/{id}",
-            defaults: new { id = RouteParameter.Optional }
-        );
-    }
 
 #### Authenticate Requests
 
@@ -53,13 +36,33 @@ You may then use the roles to seamlessly apply permissions into your application
 
 For example:
 
-    [Authorize(Roles="cat")]
+    [SSQSignonAuthentiaction, Authorize(Roles="cat")]
     public class CatController : ApiController
     {
         public dynamic Get()
         {
             return Json(new { message = string.Format("Hello {0}, you are a cat!", this.User.Identity.Name) });
         }
+    }
+    
+#### Global filter
+
+If you want all of your controllers to authenticate using SSQ signon, instead of adding the *SSQSignonAuthentication* attribute to each one you may simply add the provided filter globally.
+
+    // WebApiConfig.cs
+    public static void Register(HttpConfiguration config)
+    {
+        config.SuppressDefaultHostAuthentication();
+        config.Filters.Add(new SSQSignonAthenticationFilter());
+
+        // Web API routes
+        config.MapHttpAttributeRoutes();
+
+        config.Routes.MapHttpRoute(
+            name: "DefaultApi",
+            routeTemplate: "{controller}/{id}",
+            defaults: new { id = RouteParameter.Optional }
+        );
     }
 
 #### Issuing Tokens
