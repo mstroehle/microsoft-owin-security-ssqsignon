@@ -36,7 +36,7 @@ You may then use the roles to seamlessly apply permissions into your application
 
 For example:
 
-    [SSQSignonAuthentiaction, Authorize(Roles="cat")]
+    [SSQSignonAuthentication, Authorize(Roles="cat")]
     public class CatController : ApiController
     {
         public dynamic Get()
